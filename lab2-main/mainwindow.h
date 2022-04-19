@@ -26,6 +26,7 @@
 #include <QSerialPort>
 #include <QByteArray>
 #include <QString>
+#include <qtimer.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -43,6 +44,8 @@ private slots:
     void ReadSerial();
     void WriteSerial();
 
+    void on_btnBlockTimer_clicked();
+
 private:
     Ui::MainWindow *ui;
     QSerialPort *Arduino;
@@ -50,6 +53,7 @@ private:
     QString Buffer;
     bool isFirstTry;
     bool arduino_is_accessible;
-
+    QTimer *Timer;
+    bool isTimerBlocked;
 };
 #endif // MAINWINDOW_H
