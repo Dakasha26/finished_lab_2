@@ -29,6 +29,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
     Buffer = "";
     isFirstTry = true;
     arduino_is_accessible = false;
+    isTimerBlocked = false;
 
     bool arduino_is_available = false;
     QString arduino_uno_port_name;
@@ -58,9 +59,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::MainWi
 
         QObject::connect(Arduino, SIGNAL(readyRead()), this, SLOT(ReadSerial()));
 
-        QTimer *timer = new QTimer(this);
-        QObject::connect(timer, SIGNAL(timeout()), this, SLOT(WriteSerial()));
-        timer->start(1000); // Задержка при получениие данных
+        Timer = new QTimer(this);
+        QObject::connect(Timer, SIGNAL(timeout()), this, SLOT(WriteSerial()));
+        Timer->start(1000); // Задержка при получениие данных
     }
     else
     {
@@ -110,5 +111,20 @@ void MainWindow::ReadSerial()
 void MainWindow::WriteSerial()
 {
     Arduino->write("0"); // Символ "0" - запрос данных от Ардуино
+}
+
+/* ----- Запуск и остановка программы по клику ----- */
+void MainWindow::on_btnBlockTimer_clicked()
+{
+    if(isTimerBlocked == false)
+    {
+        Timer->blockSignals(true);
+        isTimerBlocked = true;
+        ui->activateLabel->setText("Неактивно");
+    } else {
+        Timer->blockSignals(false);
+        isTimerBlocked = false;
+        ui->activateLabel->setText("Активно");
+    }
 }
 

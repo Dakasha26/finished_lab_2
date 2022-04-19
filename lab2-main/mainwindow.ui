@@ -72,6 +72,32 @@
      <string>Давление</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnBlockTimer">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>150</y>
+      <width>151</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Остановить/Возобновить</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="activateLabel">
+    <property name="geometry">
+     <rect>
+      <x>280</x>
+      <y>160</y>
+      <width>81</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Активно</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -79,7 +105,7 @@
      <x>0</x>
      <y>0</y>
      <width>395</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>
